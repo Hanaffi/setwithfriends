@@ -19,6 +19,11 @@ import deepOrange from "@material-ui/core/colors/deepOrange";
 
 export const filter = new Filter();
 
+filter.addWords("cunting");
+
+// See: https://github.com/ekzhang/setwithfriends/issues/117
+filter.addWords("retard", "retarded");
+
 // See: https://github.com/ekzhang/setwithfriends/issues/49
 filter.removeWords("queer", "queers", "queerz", "qweers", "qweerz", "lesbian");
 
@@ -103,6 +108,9 @@ export const standardLayouts = {
     layoutChangeKey: "'",
   },
 };
+
+export const BASE_RATING = 1200;
+export const SCALING_FACTOR = 800;
 
 export function generateCards() {
   const deck = [];
@@ -314,7 +322,7 @@ export function formatTime(t, hideSubsecond) {
   const hours = Math.floor(t / (3600 * 1000));
   const rest = t % (3600 * 1000);
   const format = hideSubsecond ? "mm:ss" : "mm:ss.SS";
-  return (hours ? `${hours}:` : "") + moment(rest).format(format);
+  return (hours ? `${hours}:` : "") + moment.utc(rest).format(format);
 }
 
 /** Returns true if a game actually has hints enabled. */
